@@ -1,19 +1,13 @@
 package local.blog.blogSystem.interceptor;
 
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import local.blog.blogSystem.service.SettingService;
-import local.blog.blogSystem.type.UsAdmin;
 
 /**
  * 自定义拦截器1

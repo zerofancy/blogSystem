@@ -9,8 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import local.blog.blogSystem.service.TagService;
-import local.blog.blogSystem.type.TBlog;
-import local.blog.blogSystem.type.TFile;
 
 @Service
 

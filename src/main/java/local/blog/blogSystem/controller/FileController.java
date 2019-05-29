@@ -11,6 +11,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.catalina.connector.ClientAbortException;
 import org.apache.xerces.impl.xpath.regex.RegularExpression;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import local.blog.blogSystem.BlogSystemApplication;
 import local.blog.blogSystem.service.FileService;
 import local.blog.blogSystem.service.SettingService;
 
@@ -120,7 +120,7 @@ public class FileController {
 		// 文件名
 		String fileName = music.getName();
 		// 文件类型
-		String contentType = request.getServletContext().getMimeType(fileName);
+		//String contentType = request.getServletContext().getMimeType(fileName);
 
 		// 各种响应头设置
 		// 参考资料：https://www.ibm.com/developerworks/cn/java/joy-down/index.html

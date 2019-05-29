@@ -23,7 +23,6 @@ public class GuestServiceImpl implements GuestBookService {
 
 	@Override
 	public List<Map<String, Object>> getMessageList() {
-		// TODO 自动生成的方法存根
 		return jdbcTemplate.queryForList("select * from guestbook order by pubtime desc");
 	}
 

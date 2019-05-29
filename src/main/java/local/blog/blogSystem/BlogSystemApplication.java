@@ -1,12 +1,8 @@
 package local.blog.blogSystem;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import local.blog.blogSystem.util.CommandUtil;
 import local.blog.blogSystem.util.PropertyConstants;
 
 @SpringBootApplication

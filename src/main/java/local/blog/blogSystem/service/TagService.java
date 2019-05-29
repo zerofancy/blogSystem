@@ -4,8 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import local.blog.blogSystem.type.TBlog;
-
 public interface TagService {
 	void RefreshTags(Integer id,LinkedList<String> tags);
 	

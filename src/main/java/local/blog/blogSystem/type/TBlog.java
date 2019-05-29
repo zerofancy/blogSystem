@@ -1,6 +1,5 @@
 package local.blog.blogSystem.type;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class TBlog {

@@ -99,19 +99,16 @@ public class BlogServiceImpl implements BlogService {
 
 	@Override
 	public int getBlogListPageCount() {
-		// TODO 自动生成的方法存根
 		return jdbcTemplate.queryForObject("select count(*) from art where not(art_title like '@%')",Integer.class);
 	}
 
 	@Override
 	public int getBlogListAllowHiddenPageCount() {
-		// TODO 自动生成的方法存根
 		return jdbcTemplate.queryForObject("select count(*) from art",Integer.class);
 	}
 
 	@Override
 	public List<Map<String, Object>> getBlogListForSiteMap() {
-		// TODO 自动生成的方法存根
 		return jdbcTemplate.queryForList("select id,art_edtime from art where not(art_title like '@%')");
 	}
 
