@@ -42,10 +42,10 @@ public class FileController {
 	
 	@RequestMapping(value = "/up")
 	@ResponseBody
-	public Map mdUpload(HttpServletRequest req, @RequestParam("editormd-image-file") MultipartFile file, Model m)
+	public Map<String,Object> mdUpload(HttpServletRequest req, @RequestParam("editormd-image-file") MultipartFile file, Model m)
 			throws IOException {
 		String upPath = settingService.getConfig("sys", "uppath");
-		Map resultMap = new HashMap<>();
+		Map<String,Object> resultMap = new HashMap<>();
 		String fileName = System.currentTimeMillis() +"."+ file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
 		RegularExpression reg1 = new RegularExpression("[\\\\\\\\/:*?\\\"<>|]");
 		if (reg1.matches(fileName)) {
