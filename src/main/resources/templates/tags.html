@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>标签</title> 
+<link rel="stylesheet" href="/css/main.css" />
+<script src="/js/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+
+</head>
+
+<body>
+	<div th:utext="${headercode}"></div>
+	<div class="container">
+		<h1>归零幻想</h1>
+		<ul class="nav">
+			<li><a href="/">主页</a></li>
+			<li><a href="/tags">标签</a></li>
+			<li><a href="/rnd">随便看看</a></li>
+			<li><a href="/about">关于</a></li>
+			<li><a href="/guest">留言</a></li>
+			<li><a href="/adm/">后台管理</a></li>
+		</ul>
+	</div>
+	<div class="container">
+		<div th:each="i : ${tags}" style="display: inline;">
+			<a th:href="${'#'+i}" th:text="${'#'+i}" class="linkdec"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+		</div>
+	</div>
+	<div class="container">
+		<div th:each="i : ${tags}" style="margin-left:30px;">
+			<h3 th:id="${i}" th:text="${i}"></h3>
+			<div th:each="i1:${hdl.getArtByTag(i)}" style="margin-left:50px;">			<a
+				th:text="${i1.get('art_title')}" th:href="${'/show/'+i1.get('id')}" class="linkdec"></a>
+			</div>
+		</div>
+	</div>
+    <div class="container">
+		<div class="inf">版权所有：归零幻想 ┊ 备案号：<span th:text="${beian}"></span>┊ Powered by：归零幻想 </div>
+    </div>
+    <div class="goTop">
+    <span>Go</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>用户管理</title>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$(".test").click(function(){
+		alert($(this).parent().prev().prev().prev().prev().html());
+	});
+	$(".delbutton").click(function(){
+		if(confirm("确实要删除该用户吗？")){
+			$.post("/adm/deluser",{
+				id:$(this).parent().prev().prev().prev().html()
+			},
+			function(data,status){
+				window.location.reload();
+			});
+		}
+	});
+	$("#sub1").click(function(){
+	    $.post("/adm/adduser",
+	    	{
+	    		name:$("#usName").val(),
+	    	    pwd:$("#usPwd").val()
+	    	},
+	    function(data,status){
+			if(data.status==1){
+				window.location.reload();
+    	    }else{
+    	    	alert("添加失败，请重试。");
+         	}
+     	});
+	});
+	$(".rndPasswordButton").click(function(){
+		if(confirm("确实要修改该用户的密码吗？")){
+			$.post("/adm/setPassword",{
+				id:$(this).parent().prev().prev().prev().html(),
+				pwd:$(this).parent().prev().children(":first").val()
+			},function(data,status){
+				if(data==true){
+	    	    	alert("密码修改成功.");
+					window.location.reload();
+	    	    }else{
+	    	    	alert("修改失败，请重试。");
+	         	}
+			});
+		}
+	});
+});
+</script>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<h1>用户管理</h1>
+<table border="1" style='width: 100%;'>
+	<tr>
+		<th>id</th>
+		<th>用户名</th>
+		<th>输入</th>
+		<th>功能</th>
+	</tr>
+	<tr th:each="item : ${users}">
+		<td th:text="${item.getId()}" />
+		<td th:text="${item.getName()}" />
+		<td><input type="text" style="width: 90%"></td>
+		<td><button class="delbutton btn">删除</button>&nbsp;
+			<button class="rndPasswordButton btn">修改密码</button></td>
+	</tr>
+</table>
+<h2>添加用户</h2>
+<form action="">
+	<p>
+		用户名：<input id="usName" type="text">
+	</p>
+	<p>
+		密码：<input id="usPwd" type="text">
+	</p>
+	<input id="sub1" class="btn" type="submit" value="提交" onClick="return false">
+</form>
+</html>

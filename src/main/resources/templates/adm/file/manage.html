@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>系统设置</title>
+</head>
+
+<body>
+<form action="/file/edituppath" method="post">
+文件存放路径：<input name="path" type="text" th:value="${uppath}"><input type="submit">
+</form>
+<table>
+	<tr>
+		<th>缩略图</th>
+		<th>文件名</th>
+		<th>文件类型</th>
+		<th>用途</th>
+	</tr>
+	<tr th:each="i : ${files}">
+		<td><img th:src="${'/file/down/'+i.getName()}" width="200px"></td>
+		<td th:text="${i.getName()}"></td>
+		<td th:text="${i.getType()}"></td>
+		<td><p th:each="i1:${i.getUsage()}"><a th:text="${i1}" th:href="${'/show/'+i1}" target="_blank"></a></p></td>
+	</tr>
+</table>
+</body>

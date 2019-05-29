@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>系统设置</title>
+<link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+<h1>系统设置</h1>
+<form action="/adm/setHandle">
+<p>
+	备案号：<input name="beian" th:value="${beian}">
+</p>
+<p>
+	正则：<input name="urlreg" th:value="${urlreg}">
+</p>
+<p>
+	网址：<input name="url" th:value="${url}">
+</p>
+<p>
+额外代码（如自动提交）head部分<br>
+<textarea name="headercode" th:text="${headercode}">
+</textarea>
+</p>
+<p>
+	<input type="submit" class="btn">
+</p>
+</form>
+</body>

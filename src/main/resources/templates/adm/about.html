@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>修改文章</title>
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/editormd.min.css" />
+<link rel="stylesheet" href="/css/main.css" />
+<script src="/js/jquery.min.js"></script>
+<script src="/js/editormd.min.js"></script>
+<script type="text/javascript">
+	var testEditor;
+
+	$(function() {
+		testEditor = editormd("test-editormd", {
+			width : "90%",
+			height : $(window).height()-170,
+			syncScrolling : "single",
+			path : "/lib/",
+			saveHTMLToTextarea : true,
+            htmlDecode : "style,script,iframe|on*",            // 开启 HTML 标签解析，为了安全性，默认不开启    
+			onload : function() {
+				this.fullscreen();
+				this.previewing();
+			},
+			/**上传图片相关配置如下*/
+	        imageUpload : true,
+	        imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+	        imageUploadURL : "/file/up",//注意你后端的上传图片服务地址
+		});
+	});
+	
+	function fun_sub(){
+		var art_md=testEditor.getMarkdown();
+		var art_html=$(".editormd-preview-container").html();
+
+		$.post("/adm/aboutHandle",{
+			md:art_md,
+			html:art_html
+		},function(data,status){
+			if(status!="success"){
+				return;
+			}
+			if(data.resuCode==0){
+				alert("修改成功！");
+				window.location.reload(true);
+			}else{
+				alert("修改失败。");
+			}
+		});
+	}
+	
+	$(document).ready(function(){
+		$("#sub1").click(function() {
+			fun_sub();
+		});
+	});
+	
+	$(window).keydown(function(e) { 
+		if (e.ctrlKey && e.which == 83) {
+			fun_sub();
+			e.preventDefault();
+		}
+	});
+</script>
+</head>
+<body>
+	<div id="layout">
+		<header>
+			<h1>关于</h1>
+		</header>
+		<div id="test-editormd">
+			<textarea style="display: none;" th:text="${blog}"></textarea>
+		</div>
+	</div>
+	<div style="text-align: center;"><input type="submit" id="sub1" class="btn"></div>
+</body>
+</html>

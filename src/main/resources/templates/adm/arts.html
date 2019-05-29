@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>文章管理</title>
+<link rel="stylesheet" href="/css/main.css" />
+<script src="/js/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$(".a_del_btn").click(function(){
+		if(confirm("请问您是否真的要删除这篇文章（此操作不可撤销）？")){
+			$.post("/adm/delHandle",{
+				id:$(this).attr("tag")
+			},function(data,status){
+				if(status!="success"){
+					return;
+				}
+				if(data.resuCode==0){
+					alert("删除成功！");
+					location.reload(true);
+				}else{
+					alert("删除失败");
+				}
+			});
+		}
+	});
+});
+</script>
+</head>
+
+<body>
+	<h1 style="text-align: center;">文章管理</h1>
+	<div th:each="item : ${arts}" class="container" >
+		<h2><a class="linkdec" th:text="${item.getTitle()}" th:href="@{/adm/edit(id=${item.getId()})}"></a>&nbsp;<a class="a_del_btn btn" th:tag="${item.getId()}" style="float:right;width:100px;color: #333;background-color: #ddd;cursor: pointer;">删除</a></h2>
+			<div class="inf">
+				发布时间：
+				<div th:text="${#dates.format(item.getTime(), 'yyyy-MM-dd')}" style="display: inline;"></div>
+				|更新时间：
+				<div th:text="${#dates.format(item.getEdtime(), 'yyyy-MM-dd')}" style="display: inline;"></div>
+				|点击量：
+				<div th:text="${item.getHits()}" style="display: inline;"></div>
+			</div>
+		<hr class="spl">
+		<div th:utext="${item.getAbs()}" class="suojin" style="text-align: left;"></div>
+	</div>
+    <div class="container">
+    	<ul class="nav">
+    		<li th:if="${page>1}"><a th:href="${'/adm/arts/'+(page-1)}">上一页</a></li>
+    		<li th:if="${page<maxpage}"><a th:href="${'/adm/arts/'+(page+1)}">下一页</a></li>
+    	</ul>
+    </div>
+</body>
