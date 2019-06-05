@@ -67,11 +67,17 @@ public class MainController {
 	}
 
 	@RequestMapping("/show/{id}")
-	String show(@PathVariable("id") Integer id, Model model) {
+	String show(@PathVariable("id") Integer id, Model model,HttpServletResponse response) {
 		TBlog tmpBlog=blogService.getArticle(id);
+		if(tmpBlog==null){
+			response.setStatus(404);
+			return "error/404";
+		}
 		if(tmpBlog.getTitle().startsWith("@@")) {
 			tmpBlog.setMd("#系统提示\n您请求的内容已经被管理员禁止！");
 			tmpBlog.setHTML("拒绝访问！");
+			response.setStatus(403);
+			return "error/403";
 		}else {
 			blogService.hitArticle(id);
 		}

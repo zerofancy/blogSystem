@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>服务器内部错误</title>
+    <script src="/js/jquery.min.js">
+    </script>
+    <script>
+        arr=[
+        "A problem has been detected and windows has been shut down to prevent damage to your computer。",
+        "If this is the first time you've seen this stop error screen, restart your computer. if this screen appears again, follow these steps:",
+        "",
+        "check to be sure you have adequate disk space.  If a driver is  identified in the stop message, disable the driver or check with the manufacturer for driver updates. try changing video adapters.",
+        "check with your hardware vendor for any BIos updates. Disable BIOS memory options such as caching or shadowing. if you need to use safe mode to remove or disable components, restart your computer, press F8 to select Advanced startup options, and then select safe mode.",
+        "",
+        "",
+        "Thchnical information:",
+        "*** stop:0x0000008EL  0X0000005, 0X804E233A,0XAD92C760,0X00000000",
+        "",
+        "",
+        "",
+        "The above is deceiving you.",
+        "There seems to be something wrong with the program of the website. ",
+        "You will be redirected to the home page.",
+        "5...",
+        "4...",
+        "3...",
+        "2...",
+        "1..."
+        ];
+
+        var c=0;
+        function hello(){
+            if(c>=arr.length){
+                window.clearInterval(t1);
+                window.location.replace("/");
+                return;
+            }
+            $("#content").append("<p>"+arr[c]+"</p>");
+            c++;
+            $('html,body').animate({scrollTop:$('#bottom').offset().top}, 800);
+        }
+
+        var t1;
+        $(document).ready(function(){
+            t1 = window.setInterval(hello,900);
+        });
+    </script>
+</head>
+<body style="background:#00f;color:#fff;">
+    <div id="content"></div>
+    <div id="bottom"></div>
+</body>
+</html>
