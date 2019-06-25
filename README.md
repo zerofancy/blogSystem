@@ -19,8 +19,4 @@ spring.servlet.multipart.max-request-size=1000MB
 
 #http.port=80
 server.port = 80
-#server.ssl.key-store = 证书
-#server.ssl.key-store-password = 密码
-#server.ssl.keyStoreType = PKCS12
-#server.ssl.keyAlias = 1
 ```
