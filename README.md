@@ -1,2 +1,26 @@
 # blogSystem
 我的个人博客系统
+
+## application.properties
+```
+
+spring.thymeleaf.mode=LEGACYHTML5
+
+spring.datasource.url=jdbc:mysql://localhost:3306/myblog?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+spring.datasource.username=用户名
+spring.datasource.password=密码
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+multipart.maxFileSize=100Mb
+multipart.maxRequestSize=1000Mb
+spring.servlet.multipart.max-file-size=100MB
+spring.servlet.multipart.max-request-size=1000MB
+
+
+#http.port=80
+server.port = 80
+#server.ssl.key-store = 证书
+#server.ssl.key-store-password = 密码
+#server.ssl.keyStoreType = PKCS12
+#server.ssl.keyAlias = 1
+```
