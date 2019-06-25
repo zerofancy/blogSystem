@@ -53,6 +53,11 @@
 					if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
 				}
 			});
+			$("form").on('submit', function(e){
+				editor.save();
+				// 或者获取数据
+				// var data = editor.getValue();
+			});
 		});
 	</script>
 </head>
