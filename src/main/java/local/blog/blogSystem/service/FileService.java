@@ -31,6 +31,11 @@ public interface FileService {
 	 * 所有文件列表
 	 */
 	LinkedList<TFile> getFiles();
+
+	/**
+	 * 没有被任何文章利用的文件
+	 */
+	LinkedList<TFile> getUnusedFiles();
 	
 	LinkedList<Integer> getUsage(String name);
 }

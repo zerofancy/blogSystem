@@ -199,9 +199,17 @@ public class FileController {
 		}
 	}
 	@RequestMapping("/manage")
-	String manage(Model model) {
+	String manage(Model model,@RequestParam(name = "usflag",required = false) Boolean usflag) {
 		model.addAttribute("uppath", settingService.getConfig("sys", "uppath"));
-		model.addAttribute("files", fileService.getFiles());
+		if(usflag==null){
+			usflag=true;
+		}
+		model.addAttribute("usflag", usflag);
+		if(usflag){
+			model.addAttribute("files", fileService.getUnusedFiles());
+		}else{
+			model.addAttribute("files", fileService.getFiles());
+		}
 		return "adm/file/manage";
 	}
 	@RequestMapping("/edituppath")

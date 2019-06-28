@@ -3,12 +3,22 @@
 <head>
 <meta charset="utf-8" />
 <title>系统设置</title>
+<script type="text/javascript">
+	window.onload=function(){
+		console.log("当前页面装载完毕！");
+		document.getElementById("chkunused").addEventListener("click",function(){
+			window.location.replace("/file/manage/?usflag="+document.getElementById("chkunused").checked);
+		});
+	};
+	
+	</script>
 </head>
-
 <body>
 <form action="/file/edituppath" method="post">
 文件存放路径：<input name="path" type="text" th:value="${uppath}"><input type="submit">
 </form>
+<input type="checkbox" id="chkunused" th:checked="${usflag}">
+<label for="chkunused">只显示没有被任何文章使用的图片</label>
 <table>
 	<tr>
 		<th>缩略图</th>

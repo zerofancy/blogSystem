@@ -59,7 +59,23 @@ public class FileServiceImpl implements FileService {
 			tmpReturn.add((Integer) i.get("rel_artid"));
 		}
 		return tmpReturn;
-		
+	}
+
+	@Override
+	public LinkedList<TFile> getUnusedFiles() {
+		List<Map<String, Object>> tmp = jdbcTemplate.queryForList("select * from file where file_name not in(select rel_filename from filerel)");
+		LinkedList<TFile> tmpReturn=new LinkedList<>();
+		if (tmp.isEmpty()) {
+			return new LinkedList<TFile>();
+		}
+		for(Map<String,Object> i:tmp) {
+			TFile tmpFile=new TFile();
+			tmpFile.setName(i.get("file_name").toString());
+			tmpFile.setType(i.get("file_type").toString());
+			tmpFile.getUsage().addAll(getUsage(tmpFile.getName()));
+			tmpReturn.add(tmpFile);
+		}
+		return tmpReturn;
 	}
 
 }
