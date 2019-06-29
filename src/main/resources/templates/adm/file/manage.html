@@ -5,12 +5,10 @@
 <title>系统设置</title>
 <script type="text/javascript">
 	window.onload=function(){
-		console.log("当前页面装载完毕！");
 		document.getElementById("chkunused").addEventListener("click",function(){
 			window.location.replace("/file/manage/?usflag="+document.getElementById("chkunused").checked);
 		});
 	};
-	
 	</script>
 </head>
 <body>
@@ -33,4 +31,9 @@
 		<td><p th:each="i1:${i.getUsage()}"><a th:text="${i1}" th:href="${'/show/'+i1}" target="_blank"></a></p></td>
 	</tr>
 </table>
+<div>
+	<div id="foot"th:each="i:${#numbers.sequence(1,pagecount)}" style="display: inline;">
+		<a th:href="@{/file/manage(usflag=${usflag},page=${i})}" th:text="${'<'+i+'>'}" style="margin: 5 auto;"></a>
+	</div>
+</div>
 </body>

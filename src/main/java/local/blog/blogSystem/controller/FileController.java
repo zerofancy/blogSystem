@@ -199,16 +199,22 @@ public class FileController {
 		}
 	}
 	@RequestMapping("/manage")
-	String manage(Model model,@RequestParam(name = "usflag",required = false) Boolean usflag) {
+	String manage(Model model,@RequestParam(name = "usflag",required = false) Boolean usflag,@RequestParam(name = "page",required = false) Integer page) {
 		model.addAttribute("uppath", settingService.getConfig("sys", "uppath"));
 		if(usflag==null){
 			usflag=true;
 		}
+		if(page==null){
+			page=1;
+		}
 		model.addAttribute("usflag", usflag);
+		model.addAttribute("page", page);
 		if(usflag){
-			model.addAttribute("files", fileService.getUnusedFiles());
+			model.addAttribute("files", fileService.getUnusedFiles(page));
+			model.addAttribute("pagecount", fileService.getUnusedCount());
 		}else{
-			model.addAttribute("files", fileService.getFiles());
+			model.addAttribute("files", fileService.getFiles(page));
+			model.addAttribute("pagecount", fileService.getCount());
 		}
 		return "adm/file/manage";
 	}

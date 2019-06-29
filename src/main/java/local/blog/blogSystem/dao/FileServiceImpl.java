@@ -15,6 +15,7 @@ import local.blog.blogSystem.type.TFile;
 public class FileServiceImpl implements FileService {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	private int pgitems=20;//每页行数
 
 	@Override
 	public boolean addFile(String name, String type) {
@@ -35,8 +36,8 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public LinkedList<TFile> getFiles() {
-		List<Map<String, Object>> tmp = jdbcTemplate.queryForList("select * from file");
+	public LinkedList<TFile> getFiles(int page) {
+		List<Map<String, Object>> tmp = jdbcTemplate.queryForList("select * from file limit ?,?",(page-1)*pgitems,pgitems);
 		LinkedList<TFile> tmpReturn=new LinkedList<>();
 		if (tmp.isEmpty()) {
 			return new LinkedList<TFile>();
@@ -62,8 +63,8 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public LinkedList<TFile> getUnusedFiles() {
-		List<Map<String, Object>> tmp = jdbcTemplate.queryForList("select * from file where file_name not in(select rel_filename from filerel)");
+	public LinkedList<TFile> getUnusedFiles(int page) {
+		List<Map<String, Object>> tmp = jdbcTemplate.queryForList("select * from file where file_name not in(select rel_filename from filerel) limit ?,?",(page-1)*pgitems,pgitems);
 		LinkedList<TFile> tmpReturn=new LinkedList<>();
 		if (tmp.isEmpty()) {
 			return new LinkedList<TFile>();
@@ -76,6 +77,16 @@ public class FileServiceImpl implements FileService {
 			tmpReturn.add(tmpFile);
 		}
 		return tmpReturn;
+	}
+
+	@Override
+	public int getUnusedCount() {
+		return (jdbcTemplate.queryForObject("select count(*) from file where file_name not in(select rel_filename from filerel)",Integer.class)-1)/20+1;
+	}
+
+	@Override
+	public int getCount() {
+		return (jdbcTemplate.queryForObject("select count(*) from file",Integer.class)-1)/pgitems+1;
 	}
 
 }

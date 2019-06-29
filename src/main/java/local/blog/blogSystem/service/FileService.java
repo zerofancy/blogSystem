@@ -30,12 +30,16 @@ public interface FileService {
 	/**
 	 * 所有文件列表
 	 */
-	LinkedList<TFile> getFiles();
+	LinkedList<TFile> getFiles(int page);
 
 	/**
 	 * 没有被任何文章利用的文件
 	 */
-	LinkedList<TFile> getUnusedFiles();
+	LinkedList<TFile> getUnusedFiles(int page);
+
+	int getUnusedCount();
 	
 	LinkedList<Integer> getUsage(String name);
+
+	int getCount();
 }
