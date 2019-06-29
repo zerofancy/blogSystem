@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import local.blog.blogSystem.service.FileService;
 import local.blog.blogSystem.service.SettingService;
+import local.blog.blogSystem.type.TypeResult;
 
 @Controller
 @RequestMapping("/file")
@@ -222,5 +223,11 @@ public class FileController {
 	void editUppath(@RequestParam("path") String path,HttpServletResponse response) throws IOException {
 		settingService.writeConfig("sys", "uppath", path);
 		response.sendRedirect("/file/manage");
+	}
+
+	@RequestMapping("/delete")
+	@ResponseBody
+	TypeResult deleteFile(@RequestParam("filename") String filename){
+		return fileService.deleteFile(filename);
 	}
 }

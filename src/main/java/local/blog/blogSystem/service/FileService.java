@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import org.springframework.stereotype.Service;
 
 import local.blog.blogSystem.type.TFile;
+import local.blog.blogSystem.type.TypeResult;
 
 @Service
 public interface FileService {
@@ -42,4 +43,6 @@ public interface FileService {
 	LinkedList<Integer> getUsage(String name);
 
 	int getCount();
+
+	TypeResult deleteFile(String filename);
 }

@@ -3,32 +3,54 @@
 <head>
 <meta charset="utf-8" />
 <title>系统设置</title>
+<script src="/js/jquery.min.js"></script>
 <script type="text/javascript">
-	window.onload=function(){
-		document.getElementById("chkunused").addEventListener("click",function(){
-			window.location.replace("/file/manage/?usflag="+document.getElementById("chkunused").checked);
+	$(document).ready(function(){
+		$("#chkunused").change(function(){
+			location.replace("/file/manage/?usflag="+$("#chkunused").prop("checked"));
 		});
-	};
-	</script>
+	});
+	
+	function deletefile(filename){
+		if(confirm("真的要删除文件"+filename+"吗？")){
+			$.post("/file/delete",{
+				filename:filename
+			},function(data,status){
+				if(status!="success"){
+					console.log("请求失败："+status);
+					return;
+				}
+				if(data.resuCode==0){
+					alert("删除成功！");
+				}else{
+					alert(data.resuMessage);
+				}
+				location.reload(true);
+			});
+		}
+	}
+</script>
 </head>
-<body>
+<body style="padding: 10px;">
 <form action="/file/edituppath" method="post">
 文件存放路径：<input name="path" type="text" th:value="${uppath}"><input type="submit">
 </form>
 <input type="checkbox" id="chkunused" th:checked="${usflag}">
 <label for="chkunused">只显示没有被任何文章使用的图片</label>
-<table>
+<table border="1px">
 	<tr>
 		<th>缩略图</th>
 		<th>文件名</th>
 		<th>文件类型</th>
 		<th>用途</th>
+		<th>操作</th>
 	</tr>
 	<tr th:each="i : ${files}">
 		<td><img th:src="${'/file/down/'+i.getName()}" width="200px"></td>
 		<td th:text="${i.getName()}"></td>
 		<td th:text="${i.getType()}"></td>
 		<td><p th:each="i1:${i.getUsage()}"><a th:text="${i1}" th:href="${'/show/'+i1}" target="_blank"></a></p></td>
+		<td th:with="filename=${i.getName()}"><button th:onclick="javascript:deletefile([[${i.getName()}]])">删除</button></td>
 	</tr>
 </table>
 <div>
