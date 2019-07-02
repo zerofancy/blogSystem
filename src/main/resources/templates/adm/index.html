@@ -15,12 +15,18 @@
 	}
 	$(document).ready(function(){
 		function beats(){
-			$.get("/time",{},function(data,status){
-				//console.log(data);
-				//正确收到时间信息，网络连接正常
+			$.get("/adm/plause",{},function(data,status){
+				if(status!="success"){
+					in1=clearInterval(in1);
+					alert("网络异常！");
+				}else if(data.resuCode!=0){
+					in1=clearInterval(in1);
+					alert(data.resuMessage);
+					location.reload();
+				}
 			});
 		}
-		setInterval(beats, 60000);
+		var in1=setInterval(beats, 60000);
 		$("a").click(function(){  
 			if($(this).attr("target")=="_blank"){
 				return true;

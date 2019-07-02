@@ -33,6 +33,7 @@ public class AdminServiceImpl implements AdminService {
 		if (StringUtils.getMD5(tmp.get("ad_pwd") + randKey).equals(hashedKey.toUpperCase())) {
 			tmpUsr.setName(tmp.get("ad_name").toString());
 			tmpUsr.setLevel(Integer.parseInt( tmp.get("ad_level").toString()));
+			tmpUsr.setId(Integer.parseInt( tmp.get("id").toString()));
 			return tmpUsr;
 		}
 		return null;
@@ -58,6 +59,12 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public boolean setPwd(Long id, String pwd) {
 		return jdbcTemplate.update("UPDATE adm SET ad_pwd=? WHERE id = ?",pwd, id)>0;
-	}	
+	}
+
+	@Override
+	public boolean refreshToken(Integer id, String token) {
+		int res= jdbcTemplate.update("UPDATE adm SET ad_tag=? WHERE id = ? and ad_tag <> ?",token, id,token);
+		return res==0;
+	}
 
 }

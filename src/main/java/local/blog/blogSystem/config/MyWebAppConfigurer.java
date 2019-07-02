@@ -14,32 +14,28 @@ import local.blog.blogSystem.interceptor.UrlInterceptor;
 @Configuration
 
 public class MyWebAppConfigurer implements WebMvcConfigurer {
-	 @Bean
-	    public HandlerInterceptor getUrlInterceptor(){
-	        return new UrlInterceptor();
-	    }
+	@Bean
+	public HandlerInterceptor getUrlInterceptor() {
+		return new UrlInterceptor();
+	}
+
+	@Bean
+	public HandlerInterceptor getAdmInterceptor() {
+		return new AdmInterceptor();
+	}
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		// 多个拦截器组成一个拦截器链
 		// addPathPatterns 用于添加拦截规则
 		// excludePathPatterns 用户排除拦截
 
-		registry.addInterceptor(new AdmInterceptor()).addPathPatterns("/adm/**")
-													.excludePathPatterns("/adm/login")
-													.excludePathPatterns("/adm/login/**")
-													.addPathPatterns("/file/**")
-													.excludePathPatterns("/file/down/**")
-													;
+		registry.addInterceptor(getAdmInterceptor()).addPathPatterns("/adm/**").excludePathPatterns("/adm/login")
+				.excludePathPatterns("/adm/login/**").addPathPatterns("/file/**").excludePathPatterns("/file/down/**");
 		// 可以在此定义多个拦截器
-		 registry.addInterceptor(getUrlInterceptor()).addPathPatterns("/**")
-		 											.excludePathPatterns("/adm/**")
-		 											.excludePathPatterns("/file/down/**")
-		 											.excludePathPatterns("/js/**")
-		 											.excludePathPatterns("/css/**")
-		 											.excludePathPatterns("/fonts/**")
-		 											.excludePathPatterns("/lib/**")
-		 											.excludePathPatterns("/plugins/**")
-		 											;
+		registry.addInterceptor(getUrlInterceptor()).addPathPatterns("/**").excludePathPatterns("/adm/**")
+				.excludePathPatterns("/file/down/**").excludePathPatterns("/js/**").excludePathPatterns("/css/**")
+				.excludePathPatterns("/fonts/**").excludePathPatterns("/lib/**").excludePathPatterns("/plugins/**");
 	}
 
 	@Override

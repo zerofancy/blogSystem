@@ -4,6 +4,7 @@ public class UsAdmin {
 	String name="";
 	int level=-1;
 	int id;
+	String token;
 	
 	public String getName() {
 		return name;
@@ -22,5 +23,13 @@ public class UsAdmin {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 }

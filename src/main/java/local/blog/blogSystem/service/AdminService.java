@@ -29,4 +29,5 @@ public interface AdminService {
 	
 	public boolean setPwd(Long id,String pwd);
 
+	public boolean refreshToken(Integer id,String token);
 }

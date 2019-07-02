@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -167,11 +168,15 @@ public class BlogController {
 			@RequestParam(name = "usr", required = false) String usr,
 			@RequestParam(name = "pwd", required = false) String pwd,
 			@RequestParam(name = "rnd", required = false) String rnd) {
+		Random ran=new Random();
 		HttpSession session = request.getSession();
 		UsAdmin tmpUs = adminSerivce.admLogin(usr, rnd, pwd);
 		if (tmpUs == null) {
 			return new UsAdmin();
 		} else {
+			tmpUs.setToken(ran.nextLong()+"");
+			adminSerivce.refreshToken(tmpUs.getId(), tmpUs.getToken());
+			System.out.println(tmpUs.getToken());
 			session.setAttribute("user", tmpUs);
 			return tmpUs;
 		}
@@ -265,5 +270,20 @@ public class BlogController {
 		settingService.writeConfig("sys", "about", md);
 		settingService.writeConfig("sys", "about_html", html);
 		return new TypeResult("0","保存成功！");
+	}
+
+	@RequestMapping("/plause")
+	@ResponseBody
+	TypeResult plause(HttpServletRequest request,HttpServletResponse response){
+		UsAdmin user=(UsAdmin) request.getSession().getAttribute("user");
+		System.out.println(user);
+		System.out.println(user.getToken());
+		if(user!=null&&adminSerivce.refreshToken(user.getId(),user.getToken())){
+			return new TypeResult("0","success");
+		}else{
+			System.out.println(user.getToken());
+			request.getSession().setAttribute("user", null);
+			return new TypeResult("4","你的账户在其他设备登录。");
+		}
 	}
 }
