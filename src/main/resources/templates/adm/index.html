@@ -6,6 +6,19 @@
         <script src="/js/jquery.min.js"></script>
         <script>
             $(document).ready(function(){
+                function beats(){
+                    $.get("/adm/plause",{},function(data,status){
+                        if(status!="success"){
+                            in1=clearInterval(in1);
+                            alert("网络异常！");
+                        }else if(data.resuCode!=0){
+                            in1=clearInterval(in1);
+                            alert(data.resuMessage);
+                            location.reload();
+                        }
+                    });
+		        }
+		        var in1=setInterval(beats, 60000);                
                 $("a").click(function(){  
                     var href=$(this).attr("href");
                     try{
