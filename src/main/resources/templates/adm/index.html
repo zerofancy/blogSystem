@@ -1,111 +1,68 @@
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>系统后台管理</title>
-<link rel="stylesheet" type="text/css" href="/css/adm_index.css">
-<link rel="stylesheet" type="text/css" href="/css/main.css">
-<script src="/js/jquery.min.js"></script>
-<script type="text/javascript">
-	function toggleClass(dom, className) {
-		var reg = new RegExp(className, "g"), cn = dom.className, newcn = cn
-				.indexOf(className) == -1 ? (cn + " " + className) : cn
-				.replace(reg, "");
-		dom.className = newcn;
-	}
-	$(document).ready(function(){
-		function beats(){
-			$.get("/adm/plause",{},function(data,status){
-				if(status!="success"){
-					in1=clearInterval(in1);
-					alert("网络异常！");
-				}else if(data.resuCode!=0){
-					in1=clearInterval(in1);
-					alert(data.resuMessage);
-					location.reload();
-				}
-			});
-		}
-		var in1=setInterval(beats, 60000);
-		$("a").click(function(){  
-			if($(this).attr("target")=="_blank"){
-				return true;
-			}
-		    var href = $(this).attr('href');  
-		    $('#iframe').attr('src', href);
-		    return false;
-		});
-		$(".logout").click(function(){
-			if(confirm("确实要退出登录吗？")){
-			    $('#iframe').attr('src', "/adm/logout");
-			}
-		});
-	});
-	if (window!=top) // 判断当前的window对象是否是top对象
-		　　top.location.href = window.location.href; // 如果不是，将top对象的网址自动导向被嵌入网页的网址
-</script>
-</head>
-<body>
-	<div class="panel top">
-		<h1>系统后台管理</h1>
-	</div>
-	<div class="panel left">
-		<!-- 
-		<input type="button" id="" name="" value="收起/显示上部"
-			onclick="toggleClass(document.getElementsByTagName('html')[0],'hidetop')" />
-		<br /> <input type="button" id="" name="" value="收起/显示左部"
-			onclick="toggleClass(document.getElementsByTagName('html')[0],'hideleft')" />
-		<br /> <input type="button" id="" name="" value="收起/显示下部"
-			onclick="toggleClass(document.getElementsByTagName('html')[0],'hidebottom')" />
-		<hr>
-		-->
-
-			<img alt="ntutn" src="/images/ntutn.png" width="100%">
-			<p th:text="${'欢迎您，'+session.user.getName()}">欢迎您，***</p>
-			<hr>
-			<p>
-				<a href="/" target="_blank"><button class="btn">系统首页</button></a>
-			</p>
-			<hr>
-			<p>
-				<a href="/adm/arts"><button class="btn">管理数据</button></a>
-			</p>
-			<hr>
-			<p>
-				<a href="/adm/add"><button class="btn">添加数据</button></a>
-			</p>
-			<hr>
-			<p>
-				<a href="/file/manage"><button class="btn">文件管理</button></a>
-			</p>
-			<hr>
-			<p>
-				<a href="/adm/user"><button class="btn">用户管理</button></a>
-			</p>
-			<hr>
-			<p>
-				<a href="/adm/set"><button class="btn">系统设置</button></a>
-			</p>
-			<hr>
-			<p>
-				<a href="/adm/help"><button class="btn">帮助说明</button></a>
-			</p>
-			<hr>
-			<p>
-				<a href="/adm/about"><button class="btn">关于</button></a>
-			</p>
-			<hr>
-			<p>
-				<a href="mailto:yqmailsend@163.com"><button class="btn">联系作者</button></a>
-			</p>
-			<hr>
-			<p>
-				<button class="btn logout">退出登录</button>
-			</p>
-	</div>
-	<div class="panel main">
-		<iframe style="overflow: visible;" src="/adm/help" id="iframe"></iframe>
-	</div>
-	<div class="panel bottom">Powered by 软件工程1702刘海鑫</div>
-</body>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>归零幻想博客系统后台管理</title>
+        <link rel="stylesheet" type="text/css" href="/css/adm_index.css">
+        <script src="/js/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("a").click(function(){  
+                    var href=$(this).attr("href");
+                    try{
+                        if($(this).attr("target").length>0){
+                            return true;
+                        }else{
+                            $('#if_content').attr('src', href);
+                            return false;
+                        }
+                    }catch(err){
+                        console.log("catch");
+                        $('#if_content').attr('src', href);
+                        return false;
+                    }
+                    return false;
+                });
+                if (window!=top) // 判断当前的window对象是否是top对象
+		　　        top.location.href = window.location.href; // 如果不是，将top对象的网址自动导向被嵌入网页的网址
+            });
+        </script>
+    </head>
+    <body>
+        <div class="left side">
+            <img alt="ntutn" src="/images/ntutn.png" width="150px">
+            <details class="details-2" open>
+                <summary tabindex="-1">快速操作</summary>
+                <ul>
+                    <li><a href="/" target="_blank">系统首页</a></li>
+                    <li><a href="/adm/logout" onclick="return confirm('是否退出登录？');" target="_self">退出登录</a></li>
+                </ul>
+            </details>
+            <details class="details-2" open>
+                <summary tabindex="-1">内容管理</summary>
+                <ul>
+                    <li><a href="/adm/add">添加博客</a></li>
+                    <li><a href="/adm/arts">管理博客</a></li>
+                    <li><a href="/file/manage">文件管理</a></li>
+                </ul>
+            </details>
+            <details class="details-2">
+                <summary>其他设置</summary>
+                <ul>
+                    <li><a href="/adm/user">用户管理</a></li>
+                </ul>
+            </details>
+            <details class="details-2">
+                <summary tabindex="-1">系统设置</summary>
+                <ul>
+                    <li><a href="/adm/set">基本设置</a></li>
+                    <li><a href="/adm/about">关于</a></li>
+                    <li><a href="/adm/help">帮助</a></li>
+                    <li><a href="mailto:yqmailsend@163.com">联系作者</a></li>
+                </ul>
+            </details>
+        </div>
+        <div class="right side">
+            <iframe width="100%" height="100%" id="if_content" src="/adm/help"></iframe>
+        </div>
+    </body>
 </html>
