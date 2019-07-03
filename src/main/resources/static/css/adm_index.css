@@ -1,6 +1,12 @@
 *{margin:0;}
 body,html{height:100%;}
-div.left{width:18%;float:left;height:100%;background: #eee;}
+div.left{
+    width:18%;
+    float:left;
+    height:100%;
+    background: #eee;
+    padding: 5px;
+}
 div.right{width:82%;float:left; height:100%;}
 details{margin:10px;}
 
@@ -23,6 +29,7 @@ li a:active{
     color: white; 
     text-decoration:none;
     background: black;
+    transition: background 1s;
 	-webkit-transition: background 1s; /* Safari */} 
 li a:visited {
     color: black; 
@@ -32,6 +39,7 @@ li a:hover {
     color: white; 
     text-decoration:none;
     background: black;
+    transition: background 1s;
 	-webkit-transition: background 1s; /* Safari */
 } 
 
