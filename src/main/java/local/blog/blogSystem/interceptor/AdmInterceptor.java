@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import local.blog.blogSystem.domain.UsAdmin;
 import local.blog.blogSystem.service.AdminService;
-import local.blog.blogSystem.type.UsAdmin;
 
 /**
  * 自定义拦截器1
@@ -41,7 +41,14 @@ public class AdmInterceptor implements HandlerInterceptor {
 						return false;
 					}
 			}
-			return true;
+			UsAdmin user= (UsAdmin) session.getAttribute("user");
+			if(adminService.refreshToken(user.getId(), user.getToken())){
+				return true;
+			}else{
+				session.setAttribute("user", null);
+				response.sendRedirect("/adm/");
+				return false;
+			}
 		} else {
 
 			PrintWriter printWriter = response.getWriter();

@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import local.blog.blogSystem.domain.TFile;
+import local.blog.blogSystem.domain.TypeResult;
 import local.blog.blogSystem.service.FileService;
 import local.blog.blogSystem.service.SettingService;
-import local.blog.blogSystem.type.TFile;
-import local.blog.blogSystem.type.TypeResult;
 
 @Service
 public class FileServiceImpl implements FileService {

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import local.blog.blogSystem.type.UsAdmin;
+import local.blog.blogSystem.domain.UsAdmin;
 
 @Service
 public interface AdminService {

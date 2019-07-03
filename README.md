@@ -20,3 +20,9 @@ spring.servlet.multipart.max-request-size=1000MB
 #http.port=80
 server.port = 80
 ```
+
+## 项目结构
+|位置|说明|
+|---|---|
+|(root)|工程启动文件|
+|config|配置信息类|

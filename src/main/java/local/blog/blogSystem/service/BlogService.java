@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import local.blog.blogSystem.type.TBlog;
+import local.blog.blogSystem.domain.TBlog;
 
 @Service
 public interface BlogService {

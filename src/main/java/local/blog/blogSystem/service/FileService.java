@@ -1,10 +1,11 @@
 package local.blog.blogSystem.service;
 
 import java.util.LinkedList;
+
 import org.springframework.stereotype.Service;
 
-import local.blog.blogSystem.type.TFile;
-import local.blog.blogSystem.type.TypeResult;
+import local.blog.blogSystem.domain.TFile;
+import local.blog.blogSystem.domain.TypeResult;
 
 @Service
 public interface FileService {
@@ -31,7 +32,7 @@ public interface FileService {
 	/**
 	 * 所有文件列表
 	 */
-	LinkedList<TFile> getFiles(int page);
+	LinkedList<local.blog.blogSystem.domain.TFile> getFiles(int page);
 
 	/**
 	 * 没有被任何文章利用的文件

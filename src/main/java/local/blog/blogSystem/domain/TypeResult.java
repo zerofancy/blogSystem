@@ -1,4 +1,4 @@
-package local.blog.blogSystem.type;
+package local.blog.blogSystem.domain;
 
 public class TypeResult {
 	String resuCode;

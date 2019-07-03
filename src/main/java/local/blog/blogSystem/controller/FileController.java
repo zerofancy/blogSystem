@@ -24,9 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import local.blog.blogSystem.domain.TypeResult;
 import local.blog.blogSystem.service.FileService;
 import local.blog.blogSystem.service.SettingService;
-import local.blog.blogSystem.type.TypeResult;
 
 @Controller
 @RequestMapping("/file")

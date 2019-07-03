@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import local.blog.blogSystem.domain.TBlog;
+import local.blog.blogSystem.domain.TypeResult;
 import local.blog.blogSystem.service.BlogService;
 import local.blog.blogSystem.service.GuestBookService;
 import local.blog.blogSystem.service.SettingService;
 import local.blog.blogSystem.service.TagService;
-import local.blog.blogSystem.type.TBlog;
-import local.blog.blogSystem.type.TypeResult;
 
 @Controller
 public class MainController {

@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import local.blog.blogSystem.domain.UsAdmin;
 import local.blog.blogSystem.service.AdminService;
-import local.blog.blogSystem.type.UsAdmin;
 import local.blog.blogSystem.util.StringUtils;
 
 @Service

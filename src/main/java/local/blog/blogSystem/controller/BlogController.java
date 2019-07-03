@@ -23,14 +23,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import local.blog.blogSystem.domain.TBlog;
+import local.blog.blogSystem.domain.TypeResult;
+import local.blog.blogSystem.domain.UsAdmin;
 import local.blog.blogSystem.service.AdminService;
 import local.blog.blogSystem.service.BlogService;
 import local.blog.blogSystem.service.FileService;
 import local.blog.blogSystem.service.SettingService;
 import local.blog.blogSystem.service.TagService;
-import local.blog.blogSystem.type.TBlog;
-import local.blog.blogSystem.type.TypeResult;
-import local.blog.blogSystem.type.UsAdmin;
 
 @Controller
 @RequestMapping("/adm")
