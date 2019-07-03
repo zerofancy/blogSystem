@@ -1,4 +1,4 @@
-package local.blog.blogSystem.dao;
+package local.blog.blogSystem.service.impl;
 
 import java.io.File;
 import java.util.LinkedList;

@@ -1,4 +1,4 @@
-package local.blog.blogSystem.dao;
+package local.blog.blogSystem.service.impl;
 
 import java.sql.Timestamp;
 import java.util.List;

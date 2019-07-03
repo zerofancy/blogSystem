@@ -31,7 +31,8 @@ public class MyWebAppConfigurer implements WebMvcConfigurer {
 		// excludePathPatterns 用户排除拦截
 
 		registry.addInterceptor(getAdmInterceptor()).addPathPatterns("/adm/**").excludePathPatterns("/adm/login")
-				.excludePathPatterns("/adm/login/**").addPathPatterns("/file/**").excludePathPatterns("/file/down/**");
+				.excludePathPatterns("/adm/login/**").addPathPatterns("/file/**").excludePathPatterns("/file/down/**")
+				.excludePathPatterns("/adm/plause");
 		// 可以在此定义多个拦截器
 		registry.addInterceptor(getUrlInterceptor()).addPathPatterns("/**").excludePathPatterns("/adm/**")
 				.excludePathPatterns("/file/down/**").excludePathPatterns("/js/**").excludePathPatterns("/css/**")

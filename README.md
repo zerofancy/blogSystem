@@ -26,3 +26,7 @@ server.port = 80
 |---|---|
 |(root)|工程启动文件|
 |config|配置信息类|
+|service|数据服务层|
+|service.impl|数据服务的实现接口|
+|controller|前端控制器|
+|utils|工具类|

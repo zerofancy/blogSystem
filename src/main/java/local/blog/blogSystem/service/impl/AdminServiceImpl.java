@@ -1,4 +1,4 @@
-package local.blog.blogSystem.dao;
+package local.blog.blogSystem.service.impl;
 
 import java.util.List;
 import java.util.Map;

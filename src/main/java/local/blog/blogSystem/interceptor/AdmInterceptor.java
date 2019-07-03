@@ -25,6 +25,7 @@ public class AdmInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+				response.setCharacterEncoding("UTF-8");
 
 		// System.out.println(">>>MyInterceptor1>>>>>>>在请求处理之前进行调用（Controller方法调用之前）");
 
@@ -37,7 +38,7 @@ public class AdmInterceptor implements HandlerInterceptor {
 				if (request.getServletPath().toLowerCase().equals(k.toLowerCase()))//.toLowerCase()实现不区分大小写
 					if ((int) ris.get(k) > ((UsAdmin) session.getAttribute("user")).getLevel()) {
 						PrintWriter printWriter = response.getWriter();
-						printWriter.write("{code:1,message:\"You are not permitted to this page!\"}");
+						printWriter.write("{resuCode:1,resuMessage:\"You are not permitted to this page!\"}");
 						return false;
 					}
 			}
@@ -46,13 +47,15 @@ public class AdmInterceptor implements HandlerInterceptor {
 				return true;
 			}else{
 				session.setAttribute("user", null);
-				response.sendRedirect("/adm/");
+				PrintWriter printWriter = response.getWriter();
+				printWriter.write("{resuCode:4,resuMessage:\"你的账户可能在其他设备登录。\"}");
+				//response.sendRedirect("/adm/");
 				return false;
 			}
 		} else {
 
 			PrintWriter printWriter = response.getWriter();
-			printWriter.write("{code:0,message:\"not login!\"}");
+			printWriter.write("{resuCode:5,resuMessage:\"not login!\"}");
 			response.sendRedirect("/adm/login");
 			return false;
 		}
